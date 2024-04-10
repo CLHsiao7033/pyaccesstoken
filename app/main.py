@@ -18,7 +18,7 @@ def azure_accessToken():
     ans = os.popen('az account get-access-token --query accessToken --output tsv').read()
     print(ans)
     return {
-            "accessToken" : ans,
+            "accessToken" : ans[:-2],
             "time" : datetime.datetime.now(),
         }
 
