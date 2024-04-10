@@ -1,0 +1,12 @@
+version: '3'
+services:
+  webapi:
+    image: webapi:latest
+    container_name: webapi
+    environment:
+      - SERVICE_IP=0.0.0.0
+      - SERVICE_PORT=8080
+    volumes:
+      - /home/hsiaocl/.azure:/home/.azure:ro
+    ports:
+      - 80:8080
