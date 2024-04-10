@@ -1,5 +1,6 @@
 import os
 import time
+import json
 import datetime
 import subprocess
 from flask import Flask
@@ -11,12 +12,14 @@ app = Flask(__name__)
 
 @app.route("/azure/accessToken", methods = ['GET'])
 def azure_accessToken():
-    proc = subprocess.Popen(["az", "account", "get-access-token", "--query", "accessToken", "--output", "tsv"], stdout=subprocess.PIPE, shell=True)
-    (out, err) = proc.communicate()
-    print("program output:", out)
+    #proc = subprocess.Popen(["az", "account", "get-access-token", "--query", "accessToken", "--output", "tsv"], stdout=subprocess.PIPE, shell=True)
+    #(out, err) = proc.communicate()
+    #print("program output:", out)
+    ans = os.popen('cat /etc/services').read()
+    print(ans)
     if(request.method == 'GET'): 
         data = { 
-            "accessToken" : out, 
+            "accessToken" : ans, 
             "time" : datetime.datetime.now(), 
         } 
     return jsonify(data)
