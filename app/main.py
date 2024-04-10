@@ -17,12 +17,10 @@ def azure_accessToken():
     #print("program output:", out)
     ans = os.popen('az account get-access-token --query accessToken --output tsv').read()
     print(ans)
-    if(request.method == 'GET'):
-        data = {
+    return {
             "accessToken" : ans,
             "time" : datetime.datetime.now(),
         }
-    return jsonify(data)
 
 
 if __name__ == '__main__':
