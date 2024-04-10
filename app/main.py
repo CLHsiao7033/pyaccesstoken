@@ -9,7 +9,7 @@ from flask import request
 
 app = Flask(__name__)
 
-@app.route("/azure/accessToken", methods=['GET'])
+@app.route("/azure/accessToken", methods = ['GET'])
 def azure_accessToken():
     proc = subprocess.Popen(["az", "account", "get-access-token", "--query", "accessToken", "--output", "tsv"], stdout=subprocess.PIPE, shell=True)
     (out, err) = proc.communicate()
