@@ -1,16 +1,23 @@
 # first layer is our python base image enabling us to run pip
 FROM python:3.7-windowsservercore-1809 
 
+RUN winget install -e --id Microsoft.AzureCLI
+RUN az --version
+
 # create directory in the container for adding your files
 WORKDIR /app 
 
 # copy over the requirements file and run pip install to install the packages into your container at the directory defined above
-COPY /app /app 
-RUN pip install --no-cache-dir -r requirements.txt --user 
+COPY ./app /app
+RUN pip install --no-cache-dir -r /app/requirements.txt --user 
 COPY . . 
 
 # enter entry point parameters executing the container
-ENTRYPOINT ["python", "./runserver.py"] 
+ENTRYPOINT ["python", "main.py"] 
 
 # exposing the port to match the port in the runserver.py file
-EXPOSE 5555
+EXPOSE 8080
+
+##### ##### ##### ##### #####
+LABEL Master=ThanatosHsiao Version=2022.12
+##### ##### ##### ##### #####
