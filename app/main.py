@@ -7,14 +7,13 @@ from flask import jsonify
 
 app = Flask(__name__)
 
-@app.route("/azure/accessToken", methods = ['GET'])
-def azure_accessToken():
-    ans = os.popen('az account get-access-token --query accessToken --output tsv').read()
+@app.route("/azure", methods = ['GET'])
+def azure_get_access_token():
+    #ans = os.popen('az account get-access-token --query accessToken --output tsv').read()
+    ans = os.popen('az account get-access-token').read()
     print(ans)
-    return {
-            "accessToken" : ans[:-2],
-            "time" : datetime.datetime.now(),
-        }
+    data = json.loads(ans)
+    return data
 
 
 if __name__ == '__main__':
